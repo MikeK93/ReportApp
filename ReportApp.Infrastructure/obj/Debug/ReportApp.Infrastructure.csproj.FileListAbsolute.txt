@@ -1,0 +1,7 @@
+D:\Files\Studying\Лабораторки\EXAMPLES\ReportAppRepository\ReportApp\ReportApp.Infrastructure\bin\Debug\ReportApp.API.dll
+D:\Files\Studying\Лабораторки\EXAMPLES\ReportAppRepository\ReportApp\ReportApp.Infrastructure\bin\Debug\ReportApp.API.pdb
+D:\Files\Studying\Лабораторки\EXAMPLES\ReportAppRepository\ReportApp\ReportApp.Infrastructure\bin\Debug\ReportApp.Domain.dll
+D:\Files\Studying\Лабораторки\EXAMPLES\ReportAppRepository\ReportApp\ReportApp.Infrastructure\bin\Debug\ReportApp.Domain.pdb
+D:\Files\Studying\Лабораторки\EXAMPLES\ReportAppRepository\ReportApp\ReportApp.Infrastructure\obj\Debug\ReportApp.Infrastructure.csprojResolveAssemblyReference.cache
+D:\Files\Studying\Лабораторки\EXAMPLES\ReportAppRepository\ReportApp\ReportApp.Infrastructure\obj\Debug\ReportApp.API.dll
+D:\Files\Studying\Лабораторки\EXAMPLES\ReportAppRepository\ReportApp\ReportApp.Infrastructure\obj\Debug\ReportApp.API.pdb

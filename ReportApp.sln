@@ -9,7 +9,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ReportApp.Tests", "ReportAp
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ReportApp.Domain", "ReportApp.Domain\ReportApp.Domain.csproj", "{94A005DD-7174-479D-AAF4-BEBBAF4F028D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ReportApp.API", "ReportApp.API\ReportApp.API.csproj", "{F193D801-3B39-4F53-83A9-3B01F1DA6419}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ReportApp.Infrastructure", "ReportApp.Infrastructure\ReportApp.Infrastructure.csproj", "{F193D801-3B39-4F53-83A9-3B01F1DA6419}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

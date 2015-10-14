@@ -9,7 +9,9 @@
 			var day = array.length > 2? parseInt(array[2]): 1 ;
 			if (year > 0 && month >= 0) {
 				return new Date(year, month - 1, day);
+			} else {
 				return null;
+			}
 		} catch (err) {}; // just throw any illegal format
 	};
 
