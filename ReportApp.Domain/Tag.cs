@@ -12,6 +12,9 @@
 
         public string Name { get; private set; }
 
-        public override string ToString() => "#" + Name;
+        public override string ToString()
+        {
+            return Name;
+        }
     }
 }

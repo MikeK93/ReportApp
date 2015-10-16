@@ -34,6 +34,9 @@ namespace ReportApp.Domain
 
         public string Description { get; private set; }
 
-        public override string ToString() => MoneySpent + " (" + Tags.Select(t => t.Name).ToString() + ")";
+        public override string ToString()
+        {
+            return MoneySpent + " (" + Tags.Select(t => "#" + t.Name + " ") + ")";
+        }
     }
 }
