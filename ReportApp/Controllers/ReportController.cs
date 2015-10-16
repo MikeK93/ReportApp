@@ -8,7 +8,6 @@ namespace ReportApp.Controllers
     {
         private readonly IReportService _service;
 
-        // public ReportController() : this(new ReportService()) { }
         public ReportController(IReportService service) { _service = service; }
 
         [HttpGet]

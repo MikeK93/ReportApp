@@ -13,7 +13,6 @@ namespace ReportApp
         {
             AreaRegistration.RegisterAllAreas();
             RouteConfig.RegisterRoutes(RouteTable.Routes);
-            
         }
     }
 }
