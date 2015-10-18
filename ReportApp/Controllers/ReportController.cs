@@ -12,8 +12,10 @@ namespace ReportApp.Controllers
         public ReportController(IReportService service) { _service = service; }
 
         [HttpGet]
-        public ActionResult Index()
+        public ActionResult Index(string date)
         {
+            ViewBag.Date = DateTime.Now.ToShortDateString();
+            
             return View(_service.GetRecordsByDate(DateTime.Now));
         }
     }

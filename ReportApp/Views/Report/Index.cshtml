@@ -1,8 +1,25 @@
 ﻿@model ReportViewModel
 @{
-    ViewBag.Title = "Report Home";
+    ViewBag.Title = ViewBag.Date;
 }
 
-<h2>@ViewBag.Title</h2>
+<h2>Today is: @ViewBag.Title</h2>
 
+<div id="cal"></div>
 
+<div id="report">
+    @foreach (var r in Model.Records)
+    {
+        <div id="@(r.Title)_@(r.MoneySpent)">
+            <label>@r.Title</label>
+            @* another fields... *@
+        </div>
+    }
+</div>
+
+<a id="addNewRecord" href="#">Add new</a>
+
+<script type="text/javascript">
+    var report = new reportCommon(new Date('@ViewBag.Date'));
+
+</script>
