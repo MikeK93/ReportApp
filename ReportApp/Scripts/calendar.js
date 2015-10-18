@@ -65,6 +65,7 @@
 				var a = tag.find('a');
 				a.text(d.getDate());
 				a.data('date', dateToStr(d));
+				$(a).attr('data-date', d.toLocaleDateString());
 				if (date.getMonth() != d.getMonth()) { // the bounday month
 					tag.addClass('off');
 				} else if (_this.data('date') == a.data('date')) { // the select day
