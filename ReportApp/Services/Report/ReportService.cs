@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using ReportApp.Infrastructure;
 using ReportApp.Models;
 
@@ -7,14 +8,21 @@ namespace ReportApp.Services.Report
 {
     public class ReportService : IReportService
     {
-        private IRecordRepository _recordRepository;
+        private IRecordRepository _recordsRepository;
 
-        public ReportService() : this(new RecordRepository()) { } 
-        public ReportService(IRecordRepository repository) { _recordRepository = repository; }
+        public ReportService(IRecordRepository repository) { _recordsRepository = repository; }
 
-        public IEnumerable<RecordViewModel> GetRecordsByDate(DateTime date)
+        public ReportViewModel GetRecordsByDate(DateTime date)
         {
-            return null;
+            var recordsViewModel = _recordsRepository
+                                            .GetAllByDate(date)
+                                            .Select(r =>
+                                                new RecordViewModel(r.Title, r.MoneySpent, r.Description, r.Tags.ToString())
+                                            );
+
+            var sum = recordsViewModel.Sum(r => r.MoneySpent);
+
+            return new ReportViewModel(recordsViewModel, sum);
         }
     }
 }

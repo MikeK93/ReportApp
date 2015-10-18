@@ -1,5 +1,6 @@
 ﻿using System;
 using ReportApp.Services.Report;
+using System.Linq;
 using System.Web.Mvc;
 
 namespace ReportApp.Controllers

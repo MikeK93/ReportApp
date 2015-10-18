@@ -6,6 +6,6 @@ namespace ReportApp.Services.Report
 {
     public interface IReportService
     {
-        IEnumerable<RecordViewModel> GetRecordsByDate(DateTime date);
+        ReportViewModel GetRecordsByDate(DateTime date);
     }
 }

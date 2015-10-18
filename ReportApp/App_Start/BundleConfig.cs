@@ -15,11 +15,13 @@ namespace ReportApp
                                "~/Scripts/jquery.validate*",
                                "~/Scripts/modernizr-*",
                                "~/Scripts/bootstrap.js",
-                               "~/Scripts/respond.js"));
+                               "~/Scripts/reportCommon.js",
+                               "~/Scripts/calendar.js"));
 
             bundles.Add(new StyleBundle("~/bundles/css").Include(
                               "~/Content/bootstrap.min.css",
-                              "~/Content/Site.css"));
+                              "~/Content/Site.css",
+                              "~/Content/calendar.css"));
         }
     }
 }

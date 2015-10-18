@@ -1,0 +1,3 @@
+﻿var reportCommon = function (initialDate) {
+
+};
