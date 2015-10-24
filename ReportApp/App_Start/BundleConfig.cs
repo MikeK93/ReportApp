@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.Optimization;
+﻿using System.Web.Optimization;
 
 namespace ReportApp
 {
@@ -16,13 +12,13 @@ namespace ReportApp
                                "~/Scripts/modernizr-*",
                                "~/Scripts/bootstrap.js",
                                "~/Scripts/calendar.js",
-                               "~/Scripts/reportCommon.js"
+                               "~/Scripts/calendarCommon.js"
                                ));
 
             bundles.Add(new StyleBundle("~/bundles/css").Include(
-                              "~/Content/bootstrap.min.css",
-                              "~/Content/Site.css",
-                              "~/Content/calendar.css"
+                              "~/Content/css/bootstrap.min.css",
+                              "~/Content/css/Site.css",
+                              "~/Content/css/calendar.css"
                               ));
         }
     }

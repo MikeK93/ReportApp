@@ -1,0 +1,14 @@
+﻿@model ReportViewModel
+
+@foreach (var r in Model.Records)
+{
+    <div id="@(r.Title)_@(r.MoneySpent)">
+        <label>@r.Title</label>
+        <label>@r.Decsription</label>
+        <span>@r.Tags</span>
+    </div>
+}
+
+<h4>Sum: @Model.Sum</h4>
+
+<a id="addNewRepord" href="javascript:void(0);">Add New Record</a>
