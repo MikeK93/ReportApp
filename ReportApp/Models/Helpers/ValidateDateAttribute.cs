@@ -15,10 +15,8 @@ namespace ReportApp.Models.Helpers
             var m = filterContext.GetActionParameterByKeyOrDefault("month", DateTime.Now.Month);
             var d = filterContext.GetActionParameterByKeyOrDefault("day", DateTime.Now.Day);
 
-            if (!IsCorrectDate(y, m, d))
+            if (!IsCorrectDate(y, m, d) && !filterContext.HttpContext.Request.IsAjaxRequest())
                 filterContext.Result = controller.ToAction("WrongDate");
-
-            base.OnActionExecuting(filterContext);
         }
 
         private bool IsCorrectDate(int y, int m, int d)

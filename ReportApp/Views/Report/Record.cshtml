@@ -1,0 +1,21 @@
+﻿@model RecordViewModel
+
+<div class="record">
+    <div class="record-header">
+        <div class="record-title">
+            <span>@Model.Title</span>
+        </div>
+        <div class="money-spent">
+            <span>@Model.MoneySpent</span>
+        </div>
+    </div>
+    <div class="description">
+        <span>@Model.Decsription</span>
+    </div>
+    <div class="tags">
+        @foreach (var tag in Model.Tags)
+        {
+            <span>#@tag</span>
+        }
+    </div>
+</div>

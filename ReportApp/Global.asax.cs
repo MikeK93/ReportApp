@@ -8,14 +8,13 @@ using System.Web.Routing;
 
 namespace ReportApp
 {
-    public class MvcApplication : HttpApplication
+    public class MvcApplication : System.Web.HttpApplication
     {
         protected void Application_Start()
         {
             AreaRegistration.RegisterAllAreas();
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
-            AreaRegistration.RegisterAllAreas();
         }
     }
 }

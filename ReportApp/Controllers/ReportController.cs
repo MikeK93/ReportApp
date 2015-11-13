@@ -1,8 +1,9 @@
 ﻿using System;
 using ReportApp.Services.Report;
-using System.Linq;
 using System.Web.Mvc;
 using ReportApp.Models.Helpers;
+using System.Collections.Generic;
+using ReportApp.Models;
 
 namespace ReportApp.Controllers
 {
@@ -20,7 +21,17 @@ namespace ReportApp.Controllers
             ViewBag.CurrentDate = DateTime.Now.ToShortDateString();
             ViewBag.ViewedDate = fullDate.ToShortDateString();
 
+            if (Request.IsAjaxRequest())
+                return PartialView("ListRecords", _service.GetRecordsByDate(fullDate));
+
             return View(_service.GetRecordsByDate(fullDate));
+        }
+
+        [HttpGet]
+        //[AjaxOnly]
+        public ActionResult AppendRecord(string title, double moneySpent, string description)//, IEnumerable<string> tags, DateTime date)
+        {
+            return PartialView("Record", _service.AppendRecord(title, description, new string[] { "test", "tag" }/*tags*/, moneySpent, /*date*/ DateTime.Now));
         }
 
         [HttpGet]

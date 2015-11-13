@@ -9,16 +9,20 @@ namespace ReportApp
             bundles.Add(new ScriptBundle("~/bundles/scripts").Include(
                                "~/Scripts/jquery-{version}.js",
                                "~/Scripts/jquery.validate*",
+                               "~/Scripts/jquery-ui.js",
                                "~/Scripts/modernizr-*",
                                "~/Scripts/bootstrap.js",
                                "~/Scripts/calendar.js",
-                               "~/Scripts/calendarCommon.js"
+                               "~/Scripts/calendarCommon.js",
+                               "~/Scripts/report.js"
                                ));
 
             bundles.Add(new StyleBundle("~/bundles/css").Include(
                               "~/Content/css/bootstrap.min.css",
+                              "~/Content/css/smoothness/jquery-ui.css", 
                               "~/Content/css/Site.css",
-                              "~/Content/css/calendar.css"
+                              "~/Content/css/calendar.css",
+                              "~/Content/css/newRecordDialog.css"
                               ));
         }
     }

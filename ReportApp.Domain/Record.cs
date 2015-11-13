@@ -8,21 +8,15 @@ namespace ReportApp.Domain
 {
     public class Record
     {
-
-        public Record(int id, DateTime date, double moneySpent) : this(id, date, "NoName", moneySpent, "NoDescription") { }
-
-        public Record(int id, DateTime date, double moneySpent, string description) : this(id, date, "NoName", moneySpent, description) { }
-
-        public Record(int id, DateTime date, string title, double moneySpent, string description)
+        public Record(DateTime date, string title, double moneySpent, IEnumerable<string> tags) : this(date, title, moneySpent, "no-description", tags) { }
+        public Record(DateTime date, string title, double moneySpent, string description, IEnumerable<string> tags)
         {
-            Id = id;
             Date = date;
             Title = title;
             MoneySpent = moneySpent;
             Description = description;
+            Tags = tags;
         }
-
-        public int Id { get; private set; }
 
         public DateTime Date { get; private set; }
 
@@ -30,13 +24,8 @@ namespace ReportApp.Domain
 
         public double MoneySpent { get; private set; }
 
-        public IEnumerable<Tag> Tags { get; set; }
+        public IEnumerable<string> Tags { get; set; }
 
         public string Description { get; private set; }
-
-        public override string ToString()
-        {
-            return MoneySpent + " (" + Tags.Select(t => "#" + t.Name + " ") + ")";
-        }
     }
 }

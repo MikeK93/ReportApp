@@ -9,21 +9,37 @@ namespace ReportApp
         public static void RegisterRoutes(RouteCollection routes)
         {
             routes.MapRoute(
+                name: "AppendRecord",
+                url: "AppendRecord/{title}/{moneySpent}/{description}/{tags}/{date}",
+                defaults: new
+                {
+                    controller = "Report",
+                    action = "AppendRecord",
+                    title = UrlParameter.Optional,
+                    moneySpent = UrlParameter.Optional,
+                    description = UrlParameter.Optional,
+                    tags = UrlParameter.Optional,
+                    date = UrlParameter.Optional
+                }
+            );
+
+            routes.MapRoute(
                 name: "Default",
-                url: "",
-                defaults: new { controller = "Report", action = "Index", day = DateTime.Now.Day, month = DateTime.Now.Month, year = DateTime.Now.Year }
+                url: "{day}/{month}/{year}",
+                defaults: new
+                {
+                    controller = "Report",
+                    action = "Index",
+                    day = UrlParameter.Optional,
+                    month = UrlParameter.Optional,
+                    year = UrlParameter.Optional
+                }
             );
 
             routes.MapRoute(
                 name: "Report_Error",
                 url: "DateNotFound",
                 defaults: new { controller = "Report", action = "WrongDate" }
-            );
-
-            routes.MapRoute(
-                name: "ReportForDate",
-                url: "{day}/{month}/{year}",
-                defaults: new { controller = "Report", action = "Index", day = 0, month = 0, year = 0 }
             );
         }
     }

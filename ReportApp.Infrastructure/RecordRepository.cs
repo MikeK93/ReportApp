@@ -11,7 +11,10 @@ namespace ReportApp.Infrastructure
 
         public RecordRepository()
         {
-            _records = new List<Record>();
+            _records = new List<Record> {
+                new Record(DateTime.Now, "House", 100500, "Bought a house", new [] { "buy", "house", "big-amount" }),
+                new Record(DateTime.Now, "Food", 500, new [] { "food", "eat" })
+            };
         }
 
         public void Create(Record newRecord)
@@ -21,12 +24,7 @@ namespace ReportApp.Infrastructure
 
         public IEnumerable<Record> GetAllByDate(DateTime date)
         {
-            return _records.Where(r => r.Date == date).Select(r => r);
-        }
-
-        public Record GetById(int id)
-        {
-            return _records.FirstOrDefault(r => r.Id == id);
+            return _records.Where(r => r.Date.ToShortDateString() == date.ToShortDateString());//.Select(r => r);
         }
     }
 }

@@ -10,7 +10,9 @@ namespace ReportApp.Models.Helpers
     {
         public static T GetActionParameterByKeyOrDefault<T>(this ActionExecutingContext filterContext, string key, T defaultValue)
         {
-            return filterContext.ActionParameters[key] == null ? defaultValue : (T)filterContext.ActionParameters[key];
+            var value = filterContext.ActionParameters[key] == null ? defaultValue : (T)filterContext.ActionParameters[key];
+            filterContext.ActionParameters[key] = value;
+            return value;
         }
     }
 }

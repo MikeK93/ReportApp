@@ -9,7 +9,5 @@ namespace ReportApp.Infrastructure
         void Create(Record newRecord);
 
         IEnumerable<Record> GetAllByDate(DateTime date);
-
-        Record GetById(int id);
     }
 }

@@ -54,23 +54,25 @@
             return newDate.getDate();
         }
 
-        _this.update = function (date) {
+        _this.update = function (date, isTransitionUpdate) {
             var mDate = new Date(date);
             mDate.setDate(1); /* start of the month */
             var day = mDate.getDay(); /* value 0~6: 0 -- Sunday, 6 -- Saturday */
             mDate.setDate(mDate.getDate() - day) /* now mDate is the start day of the table */
 
             function dateToTag(d) {
-                var tag = $('<td><a href="javascript:void(0);"></a></td>');
+                var tag = $('<td><a onclick="calendar.selection(this);" href="javascript:void(0);"></a></td>');
                 var a = tag.find('a');
                 a.text(d.getDate());
                 $(a).attr('data-date', dateToStr(d));
                 if (date.getMonth() != d.getMonth()) { // the bounday month
                     tag.addClass('off');
-                } else if (_this.data('date') == a.data('date')) { // the select day
+                } else if (_this.data('date') == a.data('date') || (!isTransitionUpdate && d.toDateString() == date.toDateString())) { // the select day
+                    $(".active").removeClass('active');
                     tag.addClass('active');
                     _this.data('date', dateToStr(d));
                 }
+
                 return tag;
             };
 
@@ -119,19 +121,18 @@
             }
         });
 
-        function updateTable(monthOffset) {
+        function updateTable(monthOffset, isTransitionUpdate) {
             var date = strToDate(_this.find('.month').text());
             date.setMonth(date.getMonth() + monthOffset);
-            _this.update(date);
+            _this.update(date, isTransitionUpdate);
         };
 
         _this.find('.next').click(function () {
-            updateTable(1);
-
+            updateTable(1, true);
         });
 
         _this.find('.prev').click(function () {
-            updateTable(-1);
+            updateTable(-1, true);
         });
 
         //return this;
