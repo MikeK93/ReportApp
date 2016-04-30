@@ -1,0 +1,59 @@
+﻿@model ReportViewModel
+@{
+    ViewBag.Title = "Reports";
+}
+
+<h2 class="today">Today is: <span>@ViewBag.CurrentDate</span> </h2>
+<h4 class="viewed">Viewing report for <span>@ViewBag.ViewedDate</span></h4>
+
+<div id="cal-placeholder">
+    <div id="cal" class="column"></div>
+
+    <div id="new-record-dialog-placeholder">
+        <button id="new-record-button">Create new record</button>
+        @Html.Partial("NewRecordDialog")
+    </div>
+</div>
+
+<div id="report-section" class="report-section">
+    <div id="records">
+        @foreach (var record in Model.Records)
+        {
+            @Html.Partial("Record", record)
+        }
+    </div>
+    <div id="report-footer">
+        <div id="report-sum-text">
+            <span>Sum:</span>
+        </div>
+        <div id="report-sum">
+            <span>@Model.Sum</span>
+        </div>
+    </div>
+</div>
+
+<div id="empty-report" class="report-section" style="display: none;">
+    <span>Add new record to the report for <i class="date-selected">@ViewBag.ViewedDate</i></span>
+</div>
+
+<div id="record-template" style="display: none;">
+    <div class="record">
+        <div class="record-header">
+            <div class="record-title">
+                <span></span>
+            </div>
+            <div class="money-spent">
+                <span></span>
+            </div>
+        </div>
+        <div class="description">
+            <span></span>
+        </div>
+        <div class="tags"></div>
+    </div>
+</div>
+
+<script type="text/javascript">
+    var reportManager = new Report(!@Model.Records.Any().ToString().ToLower());
+    var calendar = new CalendarCommon('@ViewBag.ViewedDate', reportManager);
+</script>
