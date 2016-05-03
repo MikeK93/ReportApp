@@ -7,7 +7,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace ReportApp.API
+namespace ReportApp.Infrastructure
 {
     using System;
     using System.Data.Entity;

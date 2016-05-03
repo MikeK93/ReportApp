@@ -100,5 +100,31 @@
         dialog.dialog('open');
     });
 
-    // create here autocomplete for element id="tags"
+    $('#tags').select2({
+        placeholder: 'Type in tags',
+        minimumInputLength: 0,
+        allowClear: true,
+        ajax: {
+            //How long the user has to pause their typing before sending the next request
+            quietMillis: 150,
+            //The url of the json service
+            url: 'report/api/tags',
+            dataType: 'json',
+            //Our search term and what page we are on
+            data: function(term) {
+                return {
+                    tagTerm: term
+                };
+            },
+            results: function (data, page) {
+
+                // debug here
+
+                //Used to determine whether or not there are more results available,
+                //and if requests for more data should be sent in the infinite scrolling
+                var more = (page * pageSize) < data.Total;
+                return { results: data.Results, more: more };
+            }
+        }
+    });
 </script>

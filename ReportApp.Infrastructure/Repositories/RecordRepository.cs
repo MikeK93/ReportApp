@@ -3,8 +3,9 @@ using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
 using System.Threading.Tasks;
+using ReportApp.Infrastructure.Abstaction;
 
-namespace ReportApp.API.RecordRepository
+namespace ReportApp.Infrastructure.Repositories
 {
     public class RecordRepository : IRecordRepository
     {

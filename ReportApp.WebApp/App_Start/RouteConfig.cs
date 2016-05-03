@@ -8,22 +8,6 @@ namespace ReportApp.WebApp
         public static void RegisterRoutes(RouteCollection routes)
         {
             routes.MapRoute(
-                name: "ReportApi_AppendRecord",
-                url: "report/api/append-record",
-                defaults: new
-                {
-                    controller = "ReportApi",
-                    action = "AppendRecord",
-                    title = UrlParameter.Optional,
-                    moneySpent = UrlParameter.Optional,
-                    description = UrlParameter.Optional,
-                    tags = UrlParameter.Optional,
-                    date = UrlParameter.Optional
-                }
-            );
-
-
-            routes.MapRoute(
                 name: "ReportApi",
                 url: "report/api/{action}",
                 defaults: new

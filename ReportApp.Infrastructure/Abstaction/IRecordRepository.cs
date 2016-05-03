@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
-namespace ReportApp.API.RecordRepository
+namespace ReportApp.Infrastructure.Abstaction
 {
     public interface IRecordRepository
     {

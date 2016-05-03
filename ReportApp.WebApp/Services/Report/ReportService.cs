@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using ReportApp.API.RecordRepository;
+using ReportApp.Infrastructure.Abstaction;
 using ReportApp.Models;
 using ReportApp.WebApp.Models;
 using ReportApp.WebApp.Models.Helpers;
@@ -12,14 +12,16 @@ namespace ReportApp.WebApp.Services.Report
     public class ReportService : IReportService
     {
         private readonly IRecordRepository _recordsRepository;
+        private readonly ITagRepository _tagRepository;
         private readonly IReportConverter _converter;
         private readonly IRecordValidator _recordValidator;
 
-        public ReportService(IRecordRepository repository, IReportConverter converter, IRecordValidator recordValidator)
+        public ReportService(IRecordRepository repository, IReportConverter converter, IRecordValidator recordValidator, ITagRepository tagRepository)
         {
             _recordsRepository = repository;
             _converter = converter;
             _recordValidator = recordValidator;
+            _tagRepository = tagRepository;
         }
 
         public async Task<RecordViewModel> AppendRecordAsync(RecordViewModel recordViewModel)
@@ -74,6 +76,11 @@ namespace ReportApp.WebApp.Services.Report
         {
             var tags = await _recordsRepository.GetAllTagsAsync();
             return tags.Select(_converter.ConvertTagToString);
+        }
+
+        public Task<IEnumerable<string>> GetTagsByTermAsync(string tagTerm)
+        {
+            throw new NotImplementedException();
         }
 
         private async Task<bool> IsTagExistAsync(string name)

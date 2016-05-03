@@ -16,9 +16,17 @@ namespace ReportApp.WebApp.Controllers
         }
 
         [HttpPost]
+        [ActionName("append-record")]
         public async Task<JsonResult> AppendRecord(RecordViewModel record)
         {
             return Json(await _service.AppendRecordAsync(record), JsonRequestBehavior.AllowGet);
+        }
+
+        [HttpGet]
+        [ActionName("tags")]
+        public async Task<JsonResult> Tags(string tagTerm)
+        {
+            return Json(await _service.GetTagsByTermAsync(tagTerm));
         }
 
         [HttpGet]

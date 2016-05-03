@@ -7,26 +7,28 @@ namespace ReportApp.WebApp
         public static void RegisterBundles(BundleCollection bundles)
         {
             bundles.Add(new ScriptBundle("~/bundles/scripts").Include(
-                               "~/Scripts/jquery-{version}.js",
-                               "~/Scripts/jquery.validate*",
-                               "~/Scripts/jquery-ui.js",
-                               "~/Scripts/modernizr-*",
-                               "~/Scripts/bootstrap.js",
-                               "~/Scripts/calendar.js",
-                               "~/Scripts/calendarCommon.js",
-                               "~/Scripts/report.js",
-                               "~/Scripts/dropdown.js",
-                               "~/Scripts/validator.js"
-                               ));
+                "~/Scripts/jquery-{version}.js",
+                "~/Scripts/jquery.validate*",
+                "~/Scripts/jquery-ui.js",
+                "~/Scripts/modernizr-*",
+                "~/Scripts/bootstrap.js",
+                "~/Scripts/select2/select2.min.js",
+                "~/Scripts/calendar.js",
+                "~/Scripts/calendarCommon.js",
+                "~/Scripts/report.js",
+                "~/Scripts/dropdown.js",
+                "~/Scripts/validator.js"
+                ));
 
             bundles.Add(new StyleBundle("~/bundles/css").Include(
-                              "~/Content/css/bootstrap.min.css",
-                              "~/Content/css/smoothness/jquery-ui.css", 
-                              "~/Content/css/Site.css",
-                              "~/Content/css/calendar.css",
-                              "~/Content/css/newRecordDialog.css",
-                              "~/Content/css/custom-dropdown.css"
-                              ));
+                "~/Content/css/bootstrap.min.css",
+                "~/Content/css/smoothness/jquery-ui.css",
+                "~/Content/css/select2/select2.min.css",
+                "~/Content/css/Site.css",
+                "~/Content/css/calendar.css",
+                "~/Content/css/newRecordDialog.css",
+                "~/Content/css/custom-dropdown.css"
+                ));
         }
     }
 }

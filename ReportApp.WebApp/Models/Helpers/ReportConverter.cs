@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using ReportApp.API;
+using ReportApp.Infrastructure;
 using ReportApp.Models;
 
 namespace ReportApp.WebApp.Models.Helpers

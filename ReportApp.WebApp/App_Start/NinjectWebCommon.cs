@@ -3,13 +3,15 @@ using System.Web;
 using Microsoft.Web.Infrastructure.DynamicModuleHelper;
 using Ninject;
 using Ninject.Web.Common;
-using ReportApp.API.RecordRepository;
+using ReportApp.Infrastructure.Abstaction;
+using ReportApp.Infrastructure.Repositories;
 using ReportApp.WebApp;
 using ReportApp.WebApp.Models.Helpers;
 using ReportApp.WebApp.Services.Report;
+using WebActivatorEx;
 
 [assembly: WebActivatorEx.PreApplicationStartMethod(typeof(NinjectWebCommon), "Start")]
-[assembly: WebActivatorEx.ApplicationShutdownMethodAttribute(typeof(NinjectWebCommon), "Stop")]
+[assembly: ApplicationShutdownMethod(typeof(NinjectWebCommon), "Stop")]
 
 namespace ReportApp.WebApp
 {

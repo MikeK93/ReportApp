@@ -3,8 +3,8 @@ using System.Threading.Tasks;
 using FluentAssertions;
 using Moq;
 using NUnit.Framework;
-using ReportApp.API;
-using ReportApp.API.RecordRepository;
+using ReportApp.Infrastructure;
+using ReportApp.Infrastructure.Abstaction;
 using ReportApp.Models;
 using ReportApp.WebApp.Models.Helpers;
 using ReportApp.WebApp.Services.Report;
@@ -15,6 +15,7 @@ namespace ReportAppWebApp.UnitTests
     public class ReportServiceTests
     {
         private Mock<IRecordRepository> _recordRepositoryMock;
+        private Mock<ITagRepository> _tagRepositoryMock;
         private Mock<IRecordValidator> _recordValidatorMock;
         private Mock<IReportConverter> _reportConverterMock;
 
@@ -24,6 +25,7 @@ namespace ReportAppWebApp.UnitTests
             _recordRepositoryMock = new Mock<IRecordRepository>();
             _reportConverterMock = new Mock<IReportConverter>();
             _recordValidatorMock = new Mock<IRecordValidator>();
+            _tagRepositoryMock = new Mock<ITagRepository>();
             _recordValidatorMock.Setup(o => o.IsNameValid(It.IsAny<string>())).Returns(true);
             _recordValidatorMock.Setup(o => o.IsDescriptionValid(It.IsAny<string>())).Returns(true);
         }
@@ -98,7 +100,7 @@ namespace ReportAppWebApp.UnitTests
 
         public IReportService GetService()
         {
-            return new ReportService(_recordRepositoryMock.Object, _reportConverterMock.Object, _recordValidatorMock.Object);
+            return new ReportService(_recordRepositoryMock.Object, _reportConverterMock.Object, _recordValidatorMock.Object, _tagRepositoryMock.Object);
         }
     }
 }

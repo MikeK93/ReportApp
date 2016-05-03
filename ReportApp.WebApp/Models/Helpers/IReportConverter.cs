@@ -1,5 +1,5 @@
 ﻿using System.Collections.Generic;
-using ReportApp.API;
+using ReportApp.Infrastructure;
 using ReportApp.Models;
 
 namespace ReportApp.WebApp.Models.Helpers
