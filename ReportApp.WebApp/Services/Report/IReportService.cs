@@ -1,9 +1,10 @@
-﻿using ReportApp.Models;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using ReportApp.Models;
+using ReportApp.WebApp.Models;
 
-namespace ReportApp.Services.Report
+namespace ReportApp.WebApp.Services.Report
 {
     public interface IReportService
     {

@@ -1,20 +1,18 @@
+using System;
+using System.Web;
+using Microsoft.Web.Infrastructure.DynamicModuleHelper;
+using Ninject;
+using Ninject.Web.Common;
 using ReportApp.API.RecordRepository;
-using ReportApp.Services.Report;
+using ReportApp.WebApp;
+using ReportApp.WebApp.Models.Helpers;
+using ReportApp.WebApp.Services.Report;
 
-[assembly: WebActivatorEx.PreApplicationStartMethod(typeof(ReportApp.App_Start.NinjectWebCommon), "Start")]
-[assembly: WebActivatorEx.ApplicationShutdownMethodAttribute(typeof(ReportApp.App_Start.NinjectWebCommon), "Stop")]
+[assembly: WebActivatorEx.PreApplicationStartMethod(typeof(NinjectWebCommon), "Start")]
+[assembly: WebActivatorEx.ApplicationShutdownMethodAttribute(typeof(NinjectWebCommon), "Stop")]
 
-namespace ReportApp.App_Start
+namespace ReportApp.WebApp
 {
-    using System;
-    using System.Web;
-
-    using Microsoft.Web.Infrastructure.DynamicModuleHelper;
-
-    using Ninject;
-    using Ninject.Web.Common;
-    using ReportApp.Models.Helpers;
-
     public static class NinjectWebCommon 
     {
         private static readonly Bootstrapper bootstrapper = new Bootstrapper();
@@ -68,6 +66,7 @@ namespace ReportApp.App_Start
             kernel.Bind<IRecordRepository>().To<RecordRepository>();
             kernel.Bind<IReportService>().To<ReportService>();
             kernel.Bind<IReportConverter>().To<ReportConverter>();
+            kernel.Bind<IRecordValidator>().To<RecordValidator>();
         }        
     }
 }

@@ -1,10 +1,10 @@
 ﻿using System;
 using System.Threading.Tasks;
-using ReportApp.Services.Report;
 using System.Web.Mvc;
 using ReportApp.Models;
+using ReportApp.WebApp.Services.Report;
 
-namespace ReportApp.Controllers
+namespace ReportApp.WebApp.Controllers
 {
     public class ReportApiController : Controller
     {

@@ -5,9 +5,9 @@
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
       <Diagram DiagramId="beda5e2110bc4f2a929369b517fe41ea" Name="Diagram1">
-        <EntityTypeShape EntityType="ReportApp_DBModel.Record" Width="1.5" PointX="0.75" PointY="2.75" />
-        <EntityTypeShape EntityType="ReportApp_DBModel.Tag" Width="1.5" PointX="0.75" PointY="0.625" />
         <EntityTypeShape EntityType="ReportApp_DBModel.RecordTags" Width="1.5" PointX="4.875" PointY="1.625" />
+        <EntityTypeShape EntityType="ReportApp_DBModel.Record" Width="1.5" PointX="0.75" PointY="0.75" />
+        <EntityTypeShape EntityType="ReportApp_DBModel.Tag" Width="1.5" PointX="2.75" PointY="0.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

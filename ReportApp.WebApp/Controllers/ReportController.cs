@@ -1,10 +1,10 @@
 ﻿using System;
-using ReportApp.Services.Report;
-using System.Web.Mvc;
-using ReportApp.Models.Helpers;
 using System.Threading.Tasks;
+using System.Web.Mvc;
+using ReportApp.WebApp.Models.Helpers;
+using ReportApp.WebApp.Services.Report;
 
-namespace ReportApp.Controllers
+namespace ReportApp.WebApp.Controllers
 {
     public class ReportController : Controller
     {
@@ -26,7 +26,6 @@ namespace ReportApp.Controllers
             if (Request.IsAjaxRequest())
                 return Json(await _service.GetRecordsByDateAsync(fullDate), JsonRequestBehavior.AllowGet);
 
-            ViewBag.Tags = await _service.GetTagsAsync();
             return View(await _service.GetRecordsByDateAsync(fullDate));
         }
 

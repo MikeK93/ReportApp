@@ -1,9 +1,8 @@
-﻿using ReportApp.Controllers;
-using ReportApp.Models.Helpers;
-using System;
+﻿using System;
 using System.Web.Mvc;
+using ReportApp.WebApp.Controllers;
 
-namespace ReportApp.Models.Helpers
+namespace ReportApp.WebApp.Models.Helpers
 {
     public class ValidateDateAttribute : ActionFilterAttribute
     {

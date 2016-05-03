@@ -25,8 +25,8 @@ namespace ReportApp.API
             throw new UnintentionalCodeFirstException();
         }
     
-        public virtual DbSet<Record> Records { get; set; }
         public virtual DbSet<RecordTag> RecordTags { get; set; }
+        public virtual DbSet<Record> Records { get; set; }
         public virtual DbSet<Tag> Tags { get; set; }
     }
 }

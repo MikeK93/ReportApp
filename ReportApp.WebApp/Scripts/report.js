@@ -39,7 +39,7 @@
             tags.forEach(function (e) { tagsToSend.push({ 'Name': e.trim() }); });
 
             $.ajax({
-                url: "report/api/AppendRecord",
+                url: "report/api/append-record",
                 type: "POST",
                 contentType: "application/json; charset=utf-8",
                 dataType: "json",

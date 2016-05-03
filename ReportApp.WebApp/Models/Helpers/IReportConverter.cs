@@ -1,7 +1,8 @@
 ﻿using System.Collections.Generic;
 using ReportApp.API;
+using ReportApp.Models;
 
-namespace ReportApp.Models.Helpers
+namespace ReportApp.WebApp.Models.Helpers
 {
     public interface IReportConverter
     {

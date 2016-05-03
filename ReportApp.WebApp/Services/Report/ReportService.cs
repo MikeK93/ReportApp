@@ -2,40 +2,42 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using ReportApp.API;
 using ReportApp.API.RecordRepository;
 using ReportApp.Models;
-using ReportApp.Models.Helpers;
+using ReportApp.WebApp.Models;
+using ReportApp.WebApp.Models.Helpers;
 
-namespace ReportApp.Services.Report
+namespace ReportApp.WebApp.Services.Report
 {
     public class ReportService : IReportService
     {
         private readonly IRecordRepository _recordsRepository;
         private readonly IReportConverter _converter;
+        private readonly IRecordValidator _recordValidator;
 
-        public ReportService(IRecordRepository repository, IReportConverter converter)
+        public ReportService(IRecordRepository repository, IReportConverter converter, IRecordValidator recordValidator)
         {
             _recordsRepository = repository;
             _converter = converter;
+            _recordValidator = recordValidator;
         }
 
         public async Task<RecordViewModel> AppendRecordAsync(RecordViewModel recordViewModel)
         {
-            if (!RecordValidator.IsDescriptionValid(recordViewModel.Description))
+            if (!_recordValidator.IsDescriptionValid(recordViewModel.Description))
                 throw new ArgumentException(string.Format("Invalid description: {0}", recordViewModel.Description));
 
-            if (!RecordValidator.IsNameValid(recordViewModel.Title))
+            if (!_recordValidator.IsNameValid(recordViewModel.Title))
                 throw new ArgumentException(string.Format("Invalid title: {0}", recordViewModel.Title));
+
+            if (recordViewModel.Tags.Any(tag => !_recordValidator.IsNameValid(tag)))
+                throw new ArgumentException("Invalid tag");
 
             foreach (var tag in recordViewModel.Tags)
             {
-                if (!RecordValidator.IsNameValid(tag.Name))
-                    throw new ArgumentException(string.Format("Invalid tag name: {0}", tag));
-
-                var tagExist = await IsTagExistAsync(tag.Name.ToLower());
+                var tagExist = await IsTagExistAsync(tag.ToLower());
                 if (!tagExist)
-                    throw new ArgumentException(string.Format("Invalid tag. Tag does not exist: {0}", tag.Name));
+                    throw new ArgumentException("Tag does not exist");
             }
 
             var savedRecord = await _recordsRepository.SaveAsync(_converter.ConvertToRecord(recordViewModel));

@@ -1,7 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using ReportApp.Models;
 
-namespace ReportApp.Models
+namespace ReportApp.WebApp.Models
 {
     [Serializable]
     public class ReportViewModel

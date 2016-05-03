@@ -1,8 +1,9 @@
 ﻿using System.Collections.Generic;
-using ReportApp.API;
 using System.Linq;
+using ReportApp.API;
+using ReportApp.Models;
 
-namespace ReportApp.Models.Helpers
+namespace ReportApp.WebApp.Models.Helpers
 {
     public class ReportConverter : IReportConverter
     {
@@ -14,7 +15,10 @@ namespace ReportApp.Models.Helpers
                 Title = viewModel.Title,
                 MoneySpent = viewModel.MoneySpent,
                 Description = viewModel.Description,
-                RecordTags = viewModel.Tags.Select(t => new RecordTag { Tag = new Tag { Name = t.Name } }).ToList()
+                RecordTags = viewModel.Tags.Select(tag => new RecordTag
+                {
+                    Tag = new Tag { Name = tag }
+                }).ToList()
             };
         }
 
@@ -26,7 +30,7 @@ namespace ReportApp.Models.Helpers
                 Description = record.Description,
                 MoneySpent = record.MoneySpent,
                 Title = record.Title,
-                Tags = record.RecordTags.Select(t => new TagViewModel { Name = CapitalizeFirstLatter(t.Tag.Name) })
+                Tags = record.RecordTags.Select(t => CapitalizeFirstLatter(t.Tag.Name))
             };
         }
 

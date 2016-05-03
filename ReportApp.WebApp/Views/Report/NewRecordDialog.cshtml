@@ -15,7 +15,7 @@
                 <label for="description">Description: </label>
             </div>
             <div class="row">
-                <label for="custom-dropdown-placeholder">Tags: </label>
+                <label for="tags">Tags: </label>
             </div>
         </div>
         <div class="column">
@@ -28,21 +28,14 @@
             <div class="row">
                 <input id="description" type="text" />
             </div>
-            <div id="custom-dropdown-placeholder" class="row" tabindex="-1">
-
+            <div class="row">
+                <input id="tags" type="text" />
             </div>
         </div>
         <div class="dialog-footer">
             <p class="record-for-date-message">Creating new record for <span></span></p>
         </div>
     </div>
-
-    <select class="custom-dropdown-source" style="display: none;">
-        @foreach (var tag in ViewBag.Tags)
-        {
-            <option>@tag</option>
-        }
-    </select>
 
 </div>
 
@@ -107,5 +100,5 @@
         dialog.dialog('open');
     });
 
-    new Dropdown($("#custom-dropdown-placeholder"), "Select tags");
+    // create here autocomplete for element id="tags"
 </script>

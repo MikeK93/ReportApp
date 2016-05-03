@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-    <Schema Namespace="Хранилище ReportApp_DBModel" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="Хранилище ReportApp_DBModel" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Record">
           <Key>
             <PropertyRef Name="Id" />
@@ -74,8 +74,8 @@
     <edmx:ConceptualModels>
       <Schema Namespace="ReportApp_DBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
         <EntityContainer Name="DBContext" annotation:LazyLoadingEnabled="true">
-          <EntitySet Name="Records" EntityType="ReportApp_DBModel.Record" />
           <EntitySet Name="RecordTags" EntityType="ReportApp_DBModel.RecordTag" />
+          <EntitySet Name="Records" EntityType="ReportApp_DBModel.Record" />
           <EntitySet Name="Tags" EntityType="ReportApp_DBModel.Tag" />
           <AssociationSet Name="FK_RecordTags_ToRecord" Association="ReportApp_DBModel.FK_RecordTags_ToRecord">
             <End Role="Record" EntitySet="Records" />
@@ -85,7 +85,17 @@
             <End Role="Tag" EntitySet="Tags" />
             <End Role="RecordTag" EntitySet="RecordTags" />
           </AssociationSet>
-        </EntityContainer>
+          </EntityContainer>
+        <EntityType Name="RecordTag">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="TagId" Type="Int32" Nullable="false" />
+          <Property Name="RecordId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Record" Relationship="ReportApp_DBModel.FK_RecordTags_ToRecord" FromRole="RecordTag" ToRole="Record" />
+          <NavigationProperty Name="Tag" Relationship="ReportApp_DBModel.FK_RecordTags_ToTag" FromRole="RecordTag" ToRole="Tag" />
+          </EntityType>
         <EntityType Name="Record">
           <Key>
             <PropertyRef Name="Id" />
@@ -97,16 +107,6 @@
           <Property Name="MoneySpent" Type="Double" Nullable="false" />
           <Property Name="DateCreated" Type="DateTime" Nullable="false" Precision="3" />
           <NavigationProperty Name="RecordTags" Relationship="ReportApp_DBModel.FK_RecordTags_ToRecord" FromRole="Record" ToRole="RecordTag" />
-        </EntityType>
-        <EntityType Name="RecordTag">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="TagId" Type="Int32" Nullable="false" />
-          <Property Name="RecordId" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="Record" Relationship="ReportApp_DBModel.FK_RecordTags_ToRecord" FromRole="RecordTag" ToRole="Record" />
-          <NavigationProperty Name="Tag" Relationship="ReportApp_DBModel.FK_RecordTags_ToTag" FromRole="RecordTag" ToRole="Tag" />
         </EntityType>
         <EntityType Name="Tag">
           <Key>
@@ -147,6 +147,15 @@
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
         <EntityContainerMapping StorageEntityContainer="Хранилище ReportApp_DBModelContainer" CdmEntityContainer="DBContext">
+          <EntitySetMapping Name="RecordTags">
+            <EntityTypeMapping TypeName="ReportApp_DBModel.RecordTag">
+              <MappingFragment StoreEntitySet="RecordTags">
+                <ScalarProperty Name="RecordId" ColumnName="RecordId" />
+                <ScalarProperty Name="TagId" ColumnName="TagId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="Records">
             <EntityTypeMapping TypeName="ReportApp_DBModel.Record">
               <MappingFragment StoreEntitySet="Record">
@@ -155,15 +164,6 @@
                 <ScalarProperty Name="Description" ColumnName="Description" />
                 <ScalarProperty Name="Title" ColumnName="Title" />
                 <ScalarProperty Name="Date" ColumnName="Date" />
-                <ScalarProperty Name="Id" ColumnName="Id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="RecordTags">
-            <EntityTypeMapping TypeName="ReportApp_DBModel.RecordTag">
-              <MappingFragment StoreEntitySet="RecordTags">
-                <ScalarProperty Name="RecordId" ColumnName="RecordId" />
-                <ScalarProperty Name="TagId" ColumnName="TagId" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>

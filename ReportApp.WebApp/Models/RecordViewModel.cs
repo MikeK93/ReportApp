@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using ReportApp.WebApp.Models;
 
 namespace ReportApp.Models
 {
@@ -8,7 +9,7 @@ namespace ReportApp.Models
     {
         public RecordViewModel() { }
 
-        public RecordViewModel(DateTime date, string title, double moneySpent, string description, IEnumerable<TagViewModel> tags)
+        public RecordViewModel(DateTime date, string title, double moneySpent, string description, IEnumerable<string> tags)
         {
             Date = date;
             Title = title;
@@ -21,6 +22,6 @@ namespace ReportApp.Models
         public string Title { get; set; }
         public string Description { get; set; }
         public double MoneySpent { get; set; }
-        public IEnumerable<TagViewModel> Tags { get; set; }
+        public IEnumerable<string> Tags { get; set; }
     }
 }
