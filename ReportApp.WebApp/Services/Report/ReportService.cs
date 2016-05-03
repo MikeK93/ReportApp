@@ -32,14 +32,14 @@ namespace ReportApp.WebApp.Services.Report
             if (!_recordValidator.IsNameValid(recordViewModel.Title))
                 throw new ArgumentException(string.Format("Invalid title: {0}", recordViewModel.Title));
 
-            if (recordViewModel.Tags.Any(tag => !_recordValidator.IsNameValid(tag)))
+            if (recordViewModel.Tags.Any(tag => !_recordValidator.IsNameValid(tag.Name)))
                 throw new ArgumentException("Invalid tag");
 
-            foreach (var tag in recordViewModel.Tags)
+            if (recordViewModel.Tags.Any(tag => tag.Id == 0))
             {
-                var tagExist = await IsTagExistAsync(tag.ToLower());
-                if (!tagExist)
-                    throw new ArgumentException("Tag does not exist");
+                var tagsToSave = recordViewModel.Tags.Select(_converter.ConvertToTag);
+                var savedTags = await _tagRepository.SaveAsync(tagsToSave);
+                recordViewModel.Tags = savedTags.Select(_converter.ConvertToViewModel);
             }
 
             var savedRecord = await _recordsRepository.SaveAsync(_converter.ConvertToRecord(recordViewModel));
@@ -72,21 +72,10 @@ namespace ReportApp.WebApp.Services.Report
             return _converter.ConvertToViewModel(records, sum);
         }
 
-        public async Task<IEnumerable<string>> GetTagsAsync()
+        public IEnumerable<TagViewModel> GetTagsByTerm(string tagTerm)
         {
-            var tags = await _recordsRepository.GetAllTagsAsync();
-            return tags.Select(_converter.ConvertTagToString);
-        }
-
-        public Task<IEnumerable<string>> GetTagsByTermAsync(string tagTerm)
-        {
-            throw new NotImplementedException();
-        }
-
-        private async Task<bool> IsTagExistAsync(string name)
-        {
-            var tag = await _recordsRepository.GetTagByNameAsync(name);
-            return tag != null;
+            var tags = _tagRepository.GetTagsByTerm(tagTerm);
+            return tags.Select(tag => _converter.ConvertToViewModel(tag));
         }
     }
 }

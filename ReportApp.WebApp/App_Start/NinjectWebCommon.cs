@@ -66,6 +66,7 @@ namespace ReportApp.WebApp
         private static void RegisterServices(IKernel kernel)
         {
             kernel.Bind<IRecordRepository>().To<RecordRepository>();
+            kernel.Bind<ITagRepository>().To<TagRepository>();
             kernel.Bind<IReportService>().To<ReportService>();
             kernel.Bind<IReportConverter>().To<ReportConverter>();
             kernel.Bind<IRecordValidator>().To<RecordValidator>();

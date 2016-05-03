@@ -8,9 +8,12 @@ namespace ReportApp.WebApp.Models.Helpers
     {
         Record ConvertToRecord(RecordViewModel recordViewModel);
 
+        Tag ConvertToTag(TagViewModel tagViewModel);
+
         RecordViewModel ConvertToViewModel(Record record);
+        
         ReportViewModel ConvertToViewModel(IEnumerable<Record> records, double sum);
 
-        string ConvertTagToString(Tag tag);
+        TagViewModel ConvertToViewModel(Tag tag);
     }
 }

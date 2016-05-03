@@ -14,7 +14,6 @@ namespace ReportApp.WebApp.Services.Report
 
         Task<ReportViewModel> GetRecordsByRangeDate(DateTime from, DateTime to);
 
-        Task<IEnumerable<string>> GetTagsAsync();
-        Task<IEnumerable<string>> GetTagsByTermAsync(string tagTerm);
+        IEnumerable<TagViewModel> GetTagsByTerm(string tagTerm);
     }
 }

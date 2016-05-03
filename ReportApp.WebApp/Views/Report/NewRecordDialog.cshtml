@@ -1,130 +1,107 @@
-﻿<div id="new-record-dialog" title="Creating new record">
-    <p class="dialog-validate-tip">All form fields are required.</p>
-    <p id="title-validation-message" class="dialog-validate-tip" style="display: none;">Title must be numeric, contains unrerscore, dash, space and maximum length is 50 charecters.</p>
-    <p id="description-validation-message" class="dialog-validate-tip" style="display: none;">Title must be numeric, contains unrerscore, dash, exclamation sign, question mark, comma, period, space and maximum length is 400 charecters.</p>
-    <p id="money-spent-validation-message" class="dialog-validate-tip" style="display: none;">Money spent should be numeric only.</p>
-    <div>
-        <div class="column">
-            <div class="row">
-                <label for="title">Title: </label>
+﻿<div id="create-record-dialog" class="modal fade" role="dialog">
+    <div class="modal-dialog" style="max-width: 500px;">
+
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title record-for-date-message">Create new record for <span></span></h4>
             </div>
-            <div class="row">
-                <label for="money-spent">Money spent: </label>
+
+            <div class="modal-body">
+                <div class="validation-tips">
+                    <p class="dialog-validate-tip">All form fields are required.</p>
+                    <p id="title-validation-message" class="dialog-validate-tip" style="display: none;">Title must be numeric, contains unrerscore, dash, space and maximum length is 50 charecters.</p>
+                    <p id="description-validation-message" class="dialog-validate-tip" style="display: none;">Title must be numeric, contains unrerscore, dash, exclamation sign, question mark, comma, period, space and maximum length is 400 charecters.</p>
+                    <p id="money-spent-validation-message" class="dialog-validate-tip" style="display: none;">Money spent should be numeric only.</p>
+                </div>
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-6"><label>Title: </label></div>
+                        <div class="col-md-6"><input id="title" type="text" class="form-control" /></div>
+                        @* TODO: add space between 'rows' *@
+                        <div class="col-md-6"><label>Money spent: </label></div>
+                        <div class="col-md-6"><input id="money-spent" type="text" class="form-control" /></div>
+                        @* TODO: add space between 'rows' *@
+                        <div class="col-md-6"><label>Description: </label></div>
+                        <div class="col-md-6"><input id="description" type="text" class="form-control" /></div>
+                        @* TODO: add space between 'rows' *@
+                        <div class="col-md-6"><label>Tags: </label></div>
+                        <div class="col-md-6">
+                            <select class="tags form-control">
+                                <option value="3620194" selected="selected">select2/select2</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
             </div>
-            <div class="row">
-                <label for="description">Description: </label>
+
+            <div class="modal-footer">
+                <button type="button" class="btn-save btn btn-default">Ok</button>
+                <button type="button" class="btn-dismiss btn btn-default">Cancel</button>
             </div>
-            <div class="row">
-                <label for="tags">Tags: </label>
-            </div>
-        </div>
-        <div class="column">
-            <div class="row">
-                <input id="title" type="text" />
-            </div>
-            <div class="row">
-                <input id="money-spent" type="text" />
-            </div>
-            <div class="row">
-                <input id="description" type="text" />
-            </div>
-            <div class="row">
-                <input id="tags" type="text" />
-            </div>
-        </div>
-        <div class="dialog-footer">
-            <p class="record-for-date-message">Creating new record for <span></span></p>
         </div>
     </div>
-
 </div>
 
 <script type="text/javascript">
-    var $title = $("#title");
-    var $moneySpent = $("#money-spent");
-    var $description = $("#description");
-    var $tags = $("#tags");
-    var $selectedDate = $(".active a").data('date');
 
-    var $titleValidationMessage = $("#title-validation-message");
-    var $descriptionValidationMessage = $("#description-validation-message");
-    var $moneySpentValidationMessage = $("#money-spent-validation-message");
+    // TODO: tweak select2
+    function formatRepo(repo) {
+        if (repo.loading) return repo.text;
 
-    var validator = new Validator();
+        var markup = "<div class='select2-result-repository clearfix'>" +
+          "<div class='select2-result-repository__avatar'><img src='" + repo.owner.avatar_url + "' /></div>" +
+          "<div class='select2-result-repository__meta'>" +
+            "<div class='select2-result-repository__title'>" + repo.full_name + "</div>";
 
-    var dialog = $('#new-record-dialog').dialog({
-        autoOpen: false,
-        height: 310,
-        width: 400,
-        modal: true,
-        buttons: {
-            'Save': function () {
-
-                var isModelValid = true;
-
-                if (!validator.isTitleValid($title.val(), $titleValidationMessage))
-                    isModelValid = false;
-                if (!validator.isDescriptionValid($description.val(), $descriptionValidationMessage))
-                    isModelValid = false;
-                if (!validator.isMoneySpentValid($moneySpent.val(), $moneySpentValidationMessage))
-                    isModelValid = false;
-
-                if (!isModelValid)
-                    return false;
-
-                var title = $title.val().trim();
-                var descrip = $description.val().trim();
-                var moneySpent = new Number($moneySpent.val());
-
-                //  tags - must be array, filled via dropdownvar
-
-                reportManager.appendRecord(title, moneySpent, descrip, $tags.val().split(','), $selectedDate);
-                dialog.dialog("close");
-            },
-            'Cancel': function () {
-                $title.val("");
-                $moneySpent.val("");
-                $description.val("");
-                $tags.val("");
-
-                $titleValidationMessage.hide();
-                $descriptionValidationMessage.hide();
-                $moneySpentValidationMessage.hide();
-
-                dialog.dialog("close");
-            }
+        if (repo.description) {
+            markup += "<div class='select2-result-repository__description'>" + repo.description + "</div>";
         }
-    });
 
-    $('#new-record-button').click(function () {
-        dialog.dialog('open');
-    });
+        markup += "<div class='select2-result-repository__statistics'>" +
+          "<div class='select2-result-repository__forks'><i class='fa fa-flash'></i> " + repo.forks_count + " Forks</div>" +
+          "<div class='select2-result-repository__stargazers'><i class='fa fa-star'></i> " + repo.stargazers_count + " Stars</div>" +
+          "<div class='select2-result-repository__watchers'><i class='fa fa-eye'></i> " + repo.watchers_count + " Watchers</div>" +
+        "</div>" +
+        "</div></div>";
 
-    $('#tags').select2({
-        placeholder: 'Type in tags',
-        minimumInputLength: 0,
-        allowClear: true,
+        return markup;
+    }
+
+    function formatRepoSelection(repo) {
+        return repo.full_name || repo.text;
+    }
+
+    $('.tags').select2({
         ajax: {
-            //How long the user has to pause their typing before sending the next request
-            quietMillis: 150,
-            //The url of the json service
             url: 'report/api/tags',
             dataType: 'json',
-            //Our search term and what page we are on
-            data: function(term) {
+            delay: 150,
+            cache: false,
+            data: function (params) {
                 return {
-                    tagTerm: term
+                    q: params.term, // search term
+                    page: params.page
                 };
             },
-            results: function (data, page) {
+            processResults: function (data, params) {
+                // parse the results into the format expected by Select2
+                // since we are using custom formatting functions we do not need to
+                // alter the remote JSON data, except to indicate that infinite
+                // scrolling can be used
+                params.page = params.page || 1;
 
-                // debug here
-
-                //Used to determine whether or not there are more results available,
-                //and if requests for more data should be sent in the infinite scrolling
-                var more = (page * pageSize) < data.Total;
-                return { results: data.Results, more: more };
+                return {
+                    results: data.items,
+                    pagination: {
+                        more: (params.page * 30) < data.total_count
+                    }
+                };
             }
-        }
+        },
+        escapeMarkup: function (markup) { return markup; },
+        minimumInputLength: 1,
+        templateResult: formatRepo, // omitted for brevity, see the source of this page
+        templateSelection: formatRepoSelection // omitted for brevity, see the source of this page
     });
 </script>

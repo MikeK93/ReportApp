@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using FluentAssertions;
 using Moq;
@@ -6,6 +7,7 @@ using NUnit.Framework;
 using ReportApp.Infrastructure;
 using ReportApp.Infrastructure.Abstaction;
 using ReportApp.Models;
+using ReportApp.WebApp.Models;
 using ReportApp.WebApp.Models.Helpers;
 using ReportApp.WebApp.Services.Report;
 
@@ -60,7 +62,7 @@ namespace ReportAppWebApp.UnitTests
         public async Task AppendRecordAsync_ShouldThrow_OnModelContainsInvalidTags()
         {
             //arrange
-            var model = new RecordViewModel { Tags = new[] { "<invalid tag>" } };
+            var model = new RecordViewModel {Tags = new[] {new TagViewModel {Name = "<invalid tag>"}}};
             _recordValidatorMock.Setup(o => o.IsNameValid("<invalid tag>")).Returns(false);
             var target = GetService();
 
@@ -70,17 +72,18 @@ namespace ReportAppWebApp.UnitTests
         }
 
         [Test]
-        public async Task AppendRecordAsync_ShouldThrow_OnModelContainsTagThatDoesntExist()
+        public async Task AppendRecordAsync_ShouldSaveNewTag_OnModelContainsNewTagThatDoesntExist()
         {
             //arrange
             var NOT_EXISTING_TAG = "not existing tag";
-            var model = new RecordViewModel { Tags = new[] { NOT_EXISTING_TAG } };
-            _recordRepositoryMock.Setup(o => o.GetTagByNameAsync(NOT_EXISTING_TAG)).ReturnsAsync(null);
+            var model = new RecordViewModel {Tags = new[] {new TagViewModel {Name = NOT_EXISTING_TAG, Id = 0}}};
             var target = GetService();
 
-            //act & assert
-            var actual = Assert.ThrowsAsync(typeof(ArgumentException), () => target.AppendRecordAsync(model));
-            actual.Message.Should().Be("Tag does not exist");
+            //act
+            await target.AppendRecordAsync(model);
+
+            //assert
+            _tagRepositoryMock.Verify(o => o.SaveAsync(It.IsAny<IEnumerable<Tag>>()), Times.Once);
         }
 
         [Test]
@@ -88,7 +91,7 @@ namespace ReportAppWebApp.UnitTests
         {
             //assert
             var target = GetService();
-            var model = new RecordViewModel { Tags = new[] { "some-tag" } };
+            var model = new RecordViewModel { Tags = new[] { new TagViewModel { Name = "some-tag" } } };
             _recordRepositoryMock.Setup(o => o.GetTagByNameAsync(It.IsAny<string>())).ReturnsAsync(new Tag());
 
             //act

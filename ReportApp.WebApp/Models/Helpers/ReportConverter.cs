@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using ReportApp.Infrastructure;
 using ReportApp.Models;
@@ -17,8 +18,18 @@ namespace ReportApp.WebApp.Models.Helpers
                 Description = viewModel.Description,
                 RecordTags = viewModel.Tags.Select(tag => new RecordTag
                 {
-                    Tag = new Tag { Name = tag }
+                    Tag = ConvertToTag(tag)
                 }).ToList()
+            };
+        }
+
+        public Tag ConvertToTag(TagViewModel tagViewModel)
+        {
+            return new Tag
+            {
+                Id = tagViewModel.Id,
+                Name = tagViewModel.Name,
+                DateCreated = DateTime.Now
             };
         }
 
@@ -30,7 +41,11 @@ namespace ReportApp.WebApp.Models.Helpers
                 Description = record.Description,
                 MoneySpent = record.MoneySpent,
                 Title = record.Title,
-                Tags = record.RecordTags.Select(t => CapitalizeFirstLatter(t.Tag.Name))
+                Tags = record.RecordTags.Select(t => new TagViewModel
+                {
+                    Id = t.TagId,
+                    Name = CapitalizeFirstLatter(t.Tag.Name)
+                })
             };
         }
 
@@ -43,9 +58,13 @@ namespace ReportApp.WebApp.Models.Helpers
             };
         }
 
-        public string ConvertTagToString(Tag tag)
+        public TagViewModel ConvertToViewModel(Tag tag)
         {
-            return CapitalizeFirstLatter(tag.Name);
+            return new TagViewModel
+            {
+                Id = tag.Id,
+                Name = tag.Name
+            };
         }
 
         private static string CapitalizeFirstLatter(string value)

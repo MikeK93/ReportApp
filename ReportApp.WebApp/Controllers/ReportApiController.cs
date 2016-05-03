@@ -24,9 +24,9 @@ namespace ReportApp.WebApp.Controllers
 
         [HttpGet]
         [ActionName("tags")]
-        public async Task<JsonResult> Tags(string tagTerm)
+        public JsonResult Tags(string tagTerm)
         {
-            return Json(await _service.GetTagsByTermAsync(tagTerm));
+            return Json(_service.GetTagsByTerm(tagTerm));
         }
 
         [HttpGet]
