@@ -16,7 +16,8 @@ namespace ReportApp.WebApp
                 "~/Scripts/calendarCommon.js",
                 "~/Scripts/report.js",
                 "~/Scripts/validator.js",
-                "~/Scripts/newRecordDialog.js"
+                "~/Scripts/newRecordDialog.js",
+                "~/Scripts/multiselect.js"
             ));
 
             bundles.Add(new StyleBundle("~/bundles/css").Include(

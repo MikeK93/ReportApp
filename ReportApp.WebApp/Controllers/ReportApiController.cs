@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Threading.Tasks;
 using System.Web.Mvc;
-using ReportApp.Models;
+using ReportApp.WebApp.Models;
 using ReportApp.WebApp.Services.Report;
 
 namespace ReportApp.WebApp.Controllers
@@ -26,7 +26,7 @@ namespace ReportApp.WebApp.Controllers
         [ActionName("tags")]
         public JsonResult Tags(string tagTerm)
         {
-            return Json(_service.GetTagsByTerm(tagTerm));
+            return Json(_service.GetTagsByTerm(tagTerm), JsonRequestBehavior.AllowGet);
         }
 
         [HttpGet]

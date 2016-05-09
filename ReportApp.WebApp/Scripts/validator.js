@@ -48,6 +48,15 @@
 
             moneySpentValidationMessage.slideDown();
             return false;
+        },
+        isTagsSelected: function(isSelected, validationMessage) {
+            if (isSelected) {
+                validationMessage.slideUp();
+                return true;
+            } else {
+                validationMessage.slideDown();
+                return false;
+            }
         }
     }
 };

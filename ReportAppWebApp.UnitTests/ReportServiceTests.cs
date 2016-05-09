@@ -6,7 +6,6 @@ using Moq;
 using NUnit.Framework;
 using ReportApp.Infrastructure;
 using ReportApp.Infrastructure.Abstaction;
-using ReportApp.Models;
 using ReportApp.WebApp.Models;
 using ReportApp.WebApp.Models.Helpers;
 using ReportApp.WebApp.Services.Report;

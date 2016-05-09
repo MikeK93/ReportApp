@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using ReportApp.Models;
 using ReportApp.WebApp.Models;
 
 namespace ReportApp.WebApp.Services.Report

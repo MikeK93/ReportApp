@@ -1,26 +1,27 @@
-﻿function NewRecordDialog(dialogSelector, reportManager) {
+﻿function NewRecordDialog(dialogSelector, tagsMultiselect, reportManager) {
+    var validator = new Validator();
     var $dialog = $(dialogSelector);
+
     var $title = $dialog.find("#title");
     var $moneySpent = $dialog.find("#money-spent");
     var $description = $dialog.find("#description");
-    var $tags = $dialog.find("#tags");
     var $selectedDate = $dialog.find(".active a").data('date');
 
     var $titleValidationMessage = $dialog.find(".validation-tips #title-validation-message");
     var $descriptionValidationMessage = $dialog.find(".validation-tips #description-validation-message");
     var $moneySpentValidationMessage = $dialog.find(".validation-tips #money-spent-validation-message");
-
-    var validator = new Validator();
+    var $tagsValidationMessage = $dialog.find(".validation-tips #tags-validation-message");
 
     function cleanUpDialog() {
         $title.val("");
         $moneySpent.val("");
         $description.val("");
-        $tags.val("");
+        tagsMultiselect.clearSelected();
 
         $titleValidationMessage.hide();
         $descriptionValidationMessage.hide();
         $moneySpentValidationMessage.hide();
+        $tagsValidationMessage.hide();
     };
 
     $dialog.find('.btn-dismiss').on('click', function (e) {
@@ -32,26 +33,24 @@
 
         var isModelValid = true;
 
-        if (!validator.isTitleValid($title.val(), $titleValidationMessage))
-            isModelValid = false;
-        if (!validator.isDescriptionValid($description.val(), $descriptionValidationMessage))
-            isModelValid = false;
-        if (!validator.isMoneySpentValid($moneySpent.val(), $moneySpentValidationMessage))
+        var title = $title.val().trim();
+        
+        var description = $description.val().trim();
+
+        if (!validator.isTitleValid(title, $titleValidationMessage) ||
+            !validator.isMoneySpentValid($moneySpent.val(), $moneySpentValidationMessage) ||
+            !validator.isDescriptionValid(description, $descriptionValidationMessage) ||
+            !validator.isTagsSelected(tagsMultiselect.hasSelected(), $tagsValidationMessage))
             isModelValid = false;
 
         if (!isModelValid)
             return false;
 
-        var title = $title.val().trim();
-        var descrip = $description.val().trim();
         var moneySpent = new Number($moneySpent.val());
 
-        // TODO: tags - must be array
-
-        reportManager.appendRecord(title, moneySpent, descrip, $tags.val().split(','), $selectedDate);
+        reportManager.appendRecord(title, moneySpent, description, tagsMultiselect.getSelected(), $selectedDate);
 
         cleanUpDialog();
-
         $dialog.modal('hide');
     });
 };

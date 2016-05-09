@@ -10,7 +10,7 @@
     <div id="cal" class="column"></div>
 
     <div id="new-record-dialog-placeholder">
-        <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#create-record-dialog">Open Modal</button>
+        <button type="button" class="btn btn-info btn-md col-xs-12" data-toggle="modal" data-target="#create-record-dialog">Add new record</button>
         @Html.Partial("NewRecordDialog")
     </div>
 </div>
@@ -56,5 +56,5 @@
 <script type="text/javascript">
     var reportManager = new Report(!@Model.Records.Any().ToString().ToLower());
     var calendar = new CalendarCommon('@ViewBag.ViewedDate', reportManager);
-    var recordDialog = new NewRecordDialog('#create-record-dialog', reportManager);
+    var recordDialog = new NewRecordDialog('#create-record-dialog', tagsMultiselect, reportManager);
 </script>

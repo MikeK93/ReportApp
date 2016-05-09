@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using ReportApp.Models;
 
 namespace ReportApp.WebApp.Models
 {

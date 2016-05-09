@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using ReportApp.Infrastructure.Abstaction;
-using ReportApp.Models;
 using ReportApp.WebApp.Models;
 using ReportApp.WebApp.Models.Helpers;
 

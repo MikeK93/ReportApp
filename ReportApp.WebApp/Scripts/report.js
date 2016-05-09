@@ -22,6 +22,7 @@
         newRecord.find(".description span").text(data['Description']);
 
         data["Tags"].forEach(function (t) {
+            // TODO: add id to the tag element
             var tag = $("<a class='tag' onclick='javascript: void (0);'></a>");
             tag.text('#' + t.Name);
             newRecord.find(".tags").append(tag);
@@ -35,9 +36,6 @@
 
     return {
         appendRecord: function (title, moneySpent, description, tags, selectedDate) {
-            var tagsToSend = [];
-            tags.forEach(function (e) { tagsToSend.push({ 'Name': e.trim() }); });
-
             $.ajax({
                 url: "report/api/append-record",
                 type: "POST",
@@ -47,7 +45,7 @@
                     title: title,
                     moneySpent: moneySpent,
                     description: description,
-                    tags: tagsToSend,
+                    tags: tags,
                     date: new Date(selectedDate)
                 }),
 

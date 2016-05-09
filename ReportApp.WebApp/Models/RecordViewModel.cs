@@ -1,14 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
-using ReportApp.WebApp.Models;
 
-namespace ReportApp.Models
+namespace ReportApp.WebApp.Models
 {
     [Serializable]
     public class RecordViewModel
     {
-        public RecordViewModel() { }
-
+        public RecordViewModel() { Tags = new List<TagViewModel>(); }
         public RecordViewModel(DateTime date, string title, double moneySpent, string description, IEnumerable<TagViewModel> tags)
         {
             Date = date;
