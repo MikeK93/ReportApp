@@ -1,4 +1,15 @@
-﻿function Multiselect(element, placeholderText, url) {
+﻿/*
+ * @param {jQuery element for which the multiselect for} element
+ * @param {text for the dropdown placeholder} placeholderText
+ * @param {url for remote source of items} url
+ * @param {used when returning selected items to convert them to the js object} elementToObjectConverter
+ * @returns {multiselect instance} 
+ */
+var report = report || {};
+
+report.ui = report.ui || {};
+
+report.ui.Multiselect = function(element, placeholderText, url, elementToObjectConverter) {
     function _customResult(data) {
         if (data.loading) return data.text;
 
@@ -39,18 +50,8 @@
         getSelected: function () {
             var selectionPlaceholder = element.data().select2.$selection;
             var selection = selectionPlaceholder.find('.select2-selection__rendered .select2-selection__choice');
-            var result = [];
-
-            selection.each(function (index, value) {
-                var item = $(value).data('data');
-                var id = (item.id === item.text) ? 0 : item.id;
-                result.push({
-                    id: id,
-                    value: item.text
-                });
-            });
-
-            return result;
+            
+            return elementToObjectConverter.convert(selection);
         },
         hasSelected: function () {
             return this.getSelected().length !== 0;

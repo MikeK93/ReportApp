@@ -231,12 +231,11 @@
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
-    <Content Include="Scripts\calendar.js" />
+    <Content Include="Scripts\report\ui\calendar.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
-    <Content Include="Scripts\calendarCommon.js" />
-    <Content Include="Scripts\dropdown.js" />
+    <Content Include="Scripts\report\ui\calendarCommon.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />
@@ -247,9 +246,10 @@
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="Scripts\modernizr-2.6.2.js" />
-    <Content Include="Scripts\multiselect.js" />
-    <Content Include="Scripts\newRecordDialog.js" />
-    <Content Include="Scripts\report.js" />
+    <Content Include="Scripts\report\ui\multiselect.js" />
+    <Content Include="Scripts\report\ui\newRecordDialog.js" />
+    <Content Include="Scripts\report\core\reportService.js" />
+    <Content Include="Scripts\report\utils\elementToTagConverter.js" />
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.min.js" />
     <Content Include="Scripts\select2\i18n\ar.js" />
@@ -301,7 +301,7 @@
     <Content Include="Scripts\select2\select2.full.min.js" />
     <Content Include="Scripts\select2\select2.js" />
     <Content Include="Scripts\select2\select2.min.js" />
-    <Content Include="Scripts\validator.js" />
+    <Content Include="Scripts\report\utils\validator.js" />
     <Content Include="Scripts\_references.js" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">

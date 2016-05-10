@@ -12,12 +12,14 @@ namespace ReportApp.WebApp
                 "~/Scripts/bootstrap.min.js",
                 "~/Scripts/modernizr-*",
                 "~/Scripts/select2/select2.min.js",
-                "~/Scripts/calendar.js",
-                "~/Scripts/calendarCommon.js",
-                "~/Scripts/report.js",
-                "~/Scripts/validator.js",
-                "~/Scripts/newRecordDialog.js",
-                "~/Scripts/multiselect.js"
+                "~/Scripts/report/ui/calendar.js",
+                "~/Scripts/report/ui/calendarCommon.js",
+                "~/Scripts/report/ui/newRecordDialog.js",
+                "~/Scripts/report/ui/multiselect.js",
+                "~/Scripts/report/core/reportService.js",
+                "~/Scripts/report/utils/validator.js",
+                "~/Scripts/report/utils/elementToTagConverter.js", 
+                "~/Scripts/report/ui/calendar.js"
             ));
 
             bundles.Add(new StyleBundle("~/bundles/css").Include(

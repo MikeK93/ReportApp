@@ -1,4 +1,8 @@
-﻿function CalendarCommon(initialDate, reportManager) {
+﻿var report = report || {};
+
+report.ui = report.ui || {};
+
+report.ui.CalendarCommon = function (initialDate, reportManager) {
     var cal = null;
     var todayDate = initialDate;
 
@@ -48,6 +52,7 @@
 
     return {
         update: setDate,
-        select: onSelectedDate
+        select: onSelectedDate,
+        getSelectedDate: function() { return $("#cal").find(".active a").data('date'); }
     }
 };

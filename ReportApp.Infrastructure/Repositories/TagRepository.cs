@@ -36,7 +36,11 @@ namespace ReportApp.Infrastructure.Repositories
         private async Task<Tag> CreateTagAsync(Tag tag)
         {
             var newTag = _context.Tags.Create();
+
             newTag.Name = tag.Name;
+            newTag.DateCreated = tag.DateCreated;
+
+            _context.Tags.Add(newTag);
 
             await _context.SaveChangesAsync();
 

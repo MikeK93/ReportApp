@@ -1,11 +1,14 @@
-﻿function NewRecordDialog(dialogSelector, tagsMultiselect, reportManager) {
-    var validator = new Validator();
+﻿var report = report || {};
+
+report.ui = report.ui || {};
+
+report.ui.NewRecordDialog = function(dialogSelector, calendar, tagsMultiselect, reportManager) {
+    var validator = new report.utils.Validator();
     var $dialog = $(dialogSelector);
 
     var $title = $dialog.find("#title");
     var $moneySpent = $dialog.find("#money-spent");
     var $description = $dialog.find("#description");
-    var $selectedDate = $dialog.find(".active a").data('date');
 
     var $titleValidationMessage = $dialog.find(".validation-tips #title-validation-message");
     var $descriptionValidationMessage = $dialog.find(".validation-tips #description-validation-message");
@@ -37,10 +40,13 @@
         
         var description = $description.val().trim();
 
-        if (!validator.isTitleValid(title, $titleValidationMessage) ||
-            !validator.isMoneySpentValid($moneySpent.val(), $moneySpentValidationMessage) ||
-            !validator.isDescriptionValid(description, $descriptionValidationMessage) ||
-            !validator.isTagsSelected(tagsMultiselect.hasSelected(), $tagsValidationMessage))
+        if (!validator.isTitleValid(title, $titleValidationMessage))
+            isModelValid = false;
+        if (!validator.isMoneySpentValid($moneySpent.val(), $moneySpentValidationMessage))
+            isModelValid = false;
+        if(!validator.isDescriptionValid(description, $descriptionValidationMessage))
+            isModelValid = false;
+        if(!validator.isTagsSelected(tagsMultiselect.hasSelected(), $tagsValidationMessage))
             isModelValid = false;
 
         if (!isModelValid)
@@ -48,7 +54,7 @@
 
         var moneySpent = new Number($moneySpent.val());
 
-        reportManager.appendRecord(title, moneySpent, description, tagsMultiselect.getSelected(), $selectedDate);
+        reportManager.appendRecord(title, moneySpent, description, tagsMultiselect.getSelected(), calendar.getSelectedDate());
 
         cleanUpDialog();
         $dialog.modal('hide');

@@ -1,4 +1,8 @@
-﻿function Validator() {
+﻿var report = report || {};
+
+report.utils = report.utils || {};
+
+report.utils.Validator = function () {
     var isValid = function (value, maxLength, acceptedTitleCharecters) {
         if (!value)
             return false;

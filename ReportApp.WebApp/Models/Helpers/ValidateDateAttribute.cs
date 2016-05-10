@@ -8,8 +8,6 @@ namespace ReportApp.WebApp.Models.Helpers
     {
         public override void OnActionExecuting(ActionExecutingContext filterContext)
         {
-            var controller = filterContext.Controller as ReportController;
-
             var y = filterContext.GetActionParameterByKeyOrDefault("year", DateTime.Now.Year);
             var m = filterContext.GetActionParameterByKeyOrDefault("month", DateTime.Now.Month);
             var d = filterContext.GetActionParameterByKeyOrDefault("day", DateTime.Now.Day);

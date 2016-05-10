@@ -22,7 +22,7 @@
                         <div class="col-md-6 m-b-13"><input id="money-spent" type="text" class="form-control" /></div>
                         <div class="col-md-6"><label>Description: </label></div>
                         <div class="col-md-6 m-b-13"><input id="description" type="text" class="form-control" /></div>
-                        <div class="col-md-12">
+                        <div class="col-md-11 select2-multiselect">
                             <select id="tags" class="form-control"></select>
                         </div>
                     </div>
@@ -38,5 +38,5 @@
 </div>
 
 <script type="text/javascript">
-    var tagsMultiselect = new Multiselect($("#tags"), "Select tags...", "report/api/tags");
+    var tagsMultiselect = new report.ui.Multiselect($("#tags"), "Select tags...", "report/api/tags", new report.utils.ElementToTagConverter());
 </script>

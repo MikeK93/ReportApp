@@ -1,4 +1,8 @@
-﻿function Report(isListEmpty) {
+﻿var report = report || {};
+
+report.core = report.core || {};
+
+report.core.ReportService = function (isListEmpty) {
     var reportSection = $("#report-section");
     var emptyListMessage = $("#empty-report");
     var list = $("#records");

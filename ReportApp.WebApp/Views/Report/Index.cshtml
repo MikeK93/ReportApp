@@ -1,4 +1,4 @@
-﻿@model ReportApp.WebApp.Models.ReportViewModel
+﻿@model ReportViewModel
 @{
     ViewBag.Title = "Reports";
 }
@@ -54,7 +54,7 @@
 </div>
 
 <script type="text/javascript">
-    var reportManager = new Report(!@Model.Records.Any().ToString().ToLower());
-    var calendar = new CalendarCommon('@ViewBag.ViewedDate', reportManager);
-    var recordDialog = new NewRecordDialog('#create-record-dialog', tagsMultiselect, reportManager);
+    var reportService = new report.core.ReportService(!@Model.Records.Any().ToString().ToLower());
+    var calendar = new report.ui.CalendarCommon('@ViewBag.ViewedDate', reportService);
+    var recordDialog = new report.ui.NewRecordDialog('#create-record-dialog', calendar, tagsMultiselect, reportService);
 </script>
