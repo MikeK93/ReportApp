@@ -9,9 +9,9 @@ namespace ReportApp.WebApp.Services.Report
     {
         Task<RecordViewModel> AppendRecordAsync(RecordViewModel recordViewModel);
 
-        Task<ReportViewModel> GetRecordsByDateAsync(DateTime date);
+        Task<ReportViewModel> GetReportByDateAsync(DateTime date);
 
-        Task<ReportViewModel> GetRecordsByRangeDate(DateTime from, DateTime to);
+        Task<RecordsViewModel> GetRecordsByRangeDate(DateTime from, DateTime to);
 
         IEnumerable<TagViewModel> GetTagsByTerm(string tagTerm);
     }

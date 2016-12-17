@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using ReportApp.Infrastructure;
 
 namespace ReportApp.WebApp.Models.Helpers
@@ -10,9 +11,9 @@ namespace ReportApp.WebApp.Models.Helpers
         Tag ConvertToTag(TagViewModel tagViewModel);
 
         RecordViewModel ConvertToViewModel(Record record);
-        
-        ReportViewModel ConvertToViewModel(IEnumerable<Record> records, double sum);
 
         TagViewModel ConvertToViewModel(Tag tag);
+
+        ReportViewModel ConvertToViewModel(IEnumerable<Record> records, double sum, DateTime date);
     }
 }

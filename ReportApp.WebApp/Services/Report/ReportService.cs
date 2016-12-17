@@ -1,10 +1,10 @@
-﻿using System;
+﻿using ReportApp.Infrastructure.Abstaction;
+using ReportApp.WebApp.Models;
+using ReportApp.WebApp.Models.Helpers;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using ReportApp.Infrastructure.Abstaction;
-using ReportApp.WebApp.Models;
-using ReportApp.WebApp.Models.Helpers;
 
 namespace ReportApp.WebApp.Services.Report
 {
@@ -46,7 +46,7 @@ namespace ReportApp.WebApp.Services.Report
             return _converter.ConvertToViewModel(savedRecord);
         }
 
-        public async Task<ReportViewModel> GetRecordsByDateAsync(DateTime date)
+        public async Task<ReportViewModel> GetReportByDateAsync(DateTime date)
         {
             if (date == null)
                 throw new ArgumentException("Date cannot be null");
@@ -54,21 +54,22 @@ namespace ReportApp.WebApp.Services.Report
             var records = await _recordsRepository.GetAllByDateAsync(date);
             var sum = records.Sum(r => r.MoneySpent);
 
-            return _converter.ConvertToViewModel(records, sum);
+            return _converter.ConvertToViewModel(records, sum, date);
         }
 
-        public async Task<ReportViewModel> GetRecordsByRangeDate(DateTime from, DateTime to)
+        public async Task<RecordsViewModel> GetRecordsByRangeDate(DateTime from, DateTime to)
         {
-            if (from == null || to == null)
-                throw new ArgumentException("Date cannot be null");
+            throw new NotImplementedException();
+            //if (from == null || to == null)
+            //    throw new ArgumentException("Date cannot be null");
 
-            if (from > to)
-                throw new ArgumentException(string.Format("Date from: '{0}' must be less than date to: '{1}'", from, to));
+            //if (from > to)
+            //    throw new ArgumentException(string.Format("Date from: '{0}' must be less than date to: '{1}'", from, to));
 
-            var records = await _recordsRepository.GetRecordsByDateRangeAsync(from, to);
-            var sum = records.Sum(r => r.MoneySpent);
+            //var records = await _recordsRepository.GetRecordsByDateRangeAsync(from, to);
+            //var sum = records.Sum(r => r.MoneySpent);
 
-            return _converter.ConvertToViewModel(records, sum);
+            //return _converter.ConvertToViewModel(records, sum);
         }
 
         public IEnumerable<TagViewModel> GetTagsByTerm(string tagTerm)

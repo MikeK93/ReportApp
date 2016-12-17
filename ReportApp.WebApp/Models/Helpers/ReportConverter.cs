@@ -48,14 +48,14 @@ namespace ReportApp.WebApp.Models.Helpers
             };
         }
 
-        public ReportViewModel ConvertToViewModel(IEnumerable<Record> records, double sum)
-        {
-            return new ReportViewModel
-            {
-                Records = records.Select(ConvertToViewModel),
-                Sum = sum
-            };
-        }
+        //public RecordsViewModel ConvertToViewModel(IEnumerable<Record> records, double sum)
+        //{
+        //    return new RecordsViewModel
+        //    {
+        //        Records = records.Select(ConvertToViewModel),
+        //        Sum = sum
+        //    };
+        //}
 
         public TagViewModel ConvertToViewModel(Tag tag)
         {
@@ -64,6 +64,27 @@ namespace ReportApp.WebApp.Models.Helpers
                 Id = tag.Id,
                 Name = tag.Name
             };
+        }
+
+        public ReportViewModel ConvertToViewModel(IEnumerable<Record> records, double sum, DateTime date)
+        {
+            var todayDate = new DateViewModel
+            {
+                FullDate = DateTime.Now.GetDateTimeFormats()[0],
+                ShortDate = DateTime.Now.Month + "/" + DateTime.Now.Day + "/" + DateTime.Now.Year
+            };
+            var reportDate = new DateViewModel
+            {
+                FullDate = date.GetDateTimeFormats()[0],
+                ShortDate = date.Month + "/" + date.Day + "/" + date.Year
+            };
+            var recordsViewModel = new RecordsViewModel
+            {
+                Records = records.Select(ConvertToViewModel),
+                Sum = sum
+            };
+
+            return new ReportViewModel(todayDate, reportDate, recordsViewModel);
         }
 
         private static string CapitalizeFirstLatter(string value)

@@ -186,6 +186,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\DateViewModel.cs" />
     <Compile Include="Models\Helpers\ActionExecutingContextExtentions.cs" />
     <Compile Include="Models\Helpers\IRecordValidator.cs" />
     <Compile Include="Models\Helpers\IReportConverter.cs" />
@@ -193,6 +194,7 @@
     <Compile Include="Models\Helpers\ReportConverter.cs" />
     <Compile Include="Models\Helpers\ValidateDateAttribute.cs" />
     <Compile Include="Models\RecordViewModel.cs" />
+    <Compile Include="Models\RecordsViewModel.cs" />
     <Compile Include="Models\ReportViewModel.cs" />
     <Compile Include="Models\TagViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -235,7 +237,7 @@
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
-    <Content Include="Scripts\report\ui\calendarCommon.js" />
+    <Content Include="Scripts\report\ui\calendarWrapper.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />

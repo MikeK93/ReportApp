@@ -13,7 +13,7 @@ namespace ReportApp.WebApp
                 "~/Scripts/modernizr-*",
                 "~/Scripts/select2/select2.min.js",
                 "~/Scripts/report/ui/calendar.js",
-                "~/Scripts/report/ui/calendarCommon.js",
+                "~/Scripts/report/ui/calendarWrapper.js",
                 "~/Scripts/report/ui/newRecordDialog.js",
                 "~/Scripts/report/ui/multiselect.js",
                 "~/Scripts/report/core/reportService.js",

@@ -1,8 +1,8 @@
-﻿using System;
+﻿using ReportApp.WebApp.Models.Helpers;
+using ReportApp.WebApp.Services.Report;
+using System;
 using System.Threading.Tasks;
 using System.Web.Mvc;
-using ReportApp.WebApp.Models.Helpers;
-using ReportApp.WebApp.Services.Report;
 
 namespace ReportApp.WebApp.Controllers
 {
@@ -19,14 +19,13 @@ namespace ReportApp.WebApp.Controllers
         [ValidateDate]
         public async Task<ActionResult> Index(int day, int month, int year)
         {
-            var fullDate = new DateTime(year, month, day);
-            ViewBag.CurrentDate = DateTime.Now.ToShortDateString();
-            ViewBag.ViewedDate = fullDate.ToShortDateString();
+            var date = new DateTime(year, month, day);
+            var viewModel = await _service.GetReportByDateAsync(date);
 
             if (Request.IsAjaxRequest())
-                return Json(await _service.GetRecordsByDateAsync(fullDate), JsonRequestBehavior.AllowGet);
+                return Json(viewModel, JsonRequestBehavior.AllowGet);
 
-            return View(await _service.GetRecordsByDateAsync(fullDate));
+            return View(viewModel);
         }
 
         [NonAction]

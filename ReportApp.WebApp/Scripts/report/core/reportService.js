@@ -72,12 +72,14 @@ report.core.ReportService = function (isListEmpty) {
                 }
             });
         },
-        updateReportForDate: function (date) {
+        updateReportForDate: function (date, updateCalendar) {
             var d = new Date(date);
             $.ajax({
                 url: "",
                 data: { day: d.getDate(), month: d.getMonth() + 1, year: d.getFullYear() },
-                success: function (data) {
+                success: function (d) {
+                    var data = d.RecordsViewModel;
+
                     var isEmpty = data.Records.length === 0;
                     showHideList(isEmpty);
                     if (!isEmpty) {
@@ -89,6 +91,8 @@ report.core.ReportService = function (isListEmpty) {
                     else {
                         emptyListMessage.find(".date-selected").text(date);
                     }
+
+                    updateCalendar(d.ReportDate);
                 },
                 error: function (error) { console.log(error); }
             });

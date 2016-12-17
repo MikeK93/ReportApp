@@ -61,7 +61,7 @@
             mDate.setDate(mDate.getDate() - day); /* now mDate is the start day of the table */
 
             function dateToTag(d) {
-                var tag = $('<td><a onclick="calendar.select(this);" href="javascript:void(0);"></a></td>');
+                var tag = $('<td><a class="calendar-day" href="javascript:void(0);"></a></td>');
                 var a = tag.find('a');
                 a.text(d.getDate());
                 $(a).attr('data-date', dateToStr(d));
@@ -137,7 +137,8 @@
 
         //return this;
         return {
-            updateCal: _this.update
+            updateCalendar: _this.update,
+            getSelected: function() { return _this.data('date'); }
         }
     };
 

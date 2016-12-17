@@ -3,10 +3,10 @@
     ViewBag.Title = "Reports";
 }
 
-<h2 class="today">Today is: <span>@ViewBag.CurrentDate</span> </h2>
-<h4 class="viewed">Viewing report for <span>@ViewBag.ViewedDate</span></h4>
-
 <div id="cal-placeholder">
+    <h2 class="today">Today is: <span class="today-date" data-date="@Model.TodayDate.ShortDate">@Model.TodayDate.FullDate</span> </h2>
+    <h4 class="viewed">Viewing report for <span data-date="@Model.ReportDate.ShortDate">@Model.ReportDate.FullDate</span></h4>
+
     <div id="cal" class="column"></div>
 
     <div id="new-record-dialog-placeholder">
@@ -17,7 +17,7 @@
 
 <div id="report-section" class="report-section">
     <div id="records">
-        @foreach (var record in Model.Records)
+        @foreach (var record in Model.RecordsViewModel.Records)
         {
             @Html.Partial("Record", record)
         }
@@ -27,13 +27,13 @@
             <span>Sum:</span>
         </div>
         <div id="report-sum">
-            <span>@Model.Sum</span>
+            <span>@Model.RecordsViewModel.Sum</span>
         </div>
     </div>
 </div>
 
 <div id="empty-report" class="report-section" style="display: none;">
-    <span>Add new record to the report for <i class="date-selected">@ViewBag.ViewedDate</i></span>
+    <span>Add new record to the report for <i class="date-selected">@Model.ReportDate.FullDate</i></span>
 </div>
 
 <div id="record-template" style="display: none;">
@@ -54,7 +54,7 @@
 </div>
 
 <script type="text/javascript">
-    var reportService = new report.core.ReportService(!@Model.Records.Any().ToString().ToLower());
-    var calendar = new report.ui.CalendarCommon('@ViewBag.ViewedDate', reportService);
+    var reportService = new report.core.ReportService(!@Model.RecordsViewModel.Records.Any().ToString().ToLower());
+    var calendar = new report.ui.CalendarWrapper('#cal-placeholder', '@Model.ReportDate.ShortDate', reportService);
     var recordDialog = new report.ui.NewRecordDialog('#create-record-dialog', calendar, tagsMultiselect, reportService);
 </script>

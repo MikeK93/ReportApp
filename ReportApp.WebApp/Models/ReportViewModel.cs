@@ -1,20 +1,18 @@
-﻿using System;
-using System.Collections.Generic;
-
-namespace ReportApp.WebApp.Models
+﻿namespace ReportApp.WebApp.Models
 {
-    [Serializable]
     public class ReportViewModel
     {
-        public ReportViewModel() { }
-
-        public ReportViewModel(IEnumerable<RecordViewModel> records, double sum)
+        public ReportViewModel(DateViewModel today, DateViewModel report, RecordsViewModel records)
         {
-            Records = records;
-            Sum = sum;
+            TodayDate = today;
+            ReportDate = report;
+            RecordsViewModel = records;
         }
 
-        public IEnumerable<RecordViewModel> Records { get; set; }
-        public double Sum { get; set; }
+        public DateViewModel TodayDate { get; private set; }
+
+        public DateViewModel ReportDate { get; private set; }
+
+        public RecordsViewModel RecordsViewModel { get; private set; }
     }
 }
